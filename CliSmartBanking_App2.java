@@ -348,15 +348,30 @@ class CliSmartBanking_App2 {
                             
                             //check exist
                             loop_exist:
-                            if(existingCustomer(accNum, customers) ==-1)
+                            if(existingCustomer(accNum, customers) ==-1){
                                 System.out.print("Customer Doesn't Exist. Do you want to try again(Y/N) >>");
-                                if(scanner.nextLine().strip().toUpperCase().equals("Y")) continue loop_withdrawMoney;
+                                if(scanner.nextLine().strip().toUpperCase().equals("Y")) continue loop_delAcc;
                                 else screen = Dashboard; break lbl_main;
                             }
+                            
                             System.out.printf("Account Holder name of %s Deleted Successfully!!\n",customers[existingCustomerIndex][1]);
 
+                            String[][] excustomers = new String[customers.length -1][3];
+                            String[] temp = customers[existingCustomer(accNum, customers)];
+                            for (int i = 0; i < customers.length; i++) {
+                                if(customers[i] == temp) continue;
+                                else if(i < existingCustomer(accNum, excustomers)){
+                                    excustomers[i] = customers[i];
+                                }else{
+                                    excustomers[i-1] = customers[i];
+                                }
+                                
+                            }
+                            customers = excustomers;
+                            System.out.println(existingCustomer(accNum, customers));
+
                             System.out.print("Do you want to Delete Another account (Y/N) >>");
-                                if(scanner.nextLine().strip().toUpperCase().equals("Y")) continue loop_withdrawMoney;
+                                if(scanner.nextLine().strip().toUpperCase().equals("Y")) continue loop_delAcc;
                                 else screen = Dashboard; break lbl_main;
                         
                         }while(true);
