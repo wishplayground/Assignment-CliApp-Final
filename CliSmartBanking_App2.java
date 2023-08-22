@@ -23,7 +23,7 @@ class CliSmartBanking_App2 {
     
 
         //Arrays
-        String[][] customers = {{"SDB-00001","amal","7000"},{"SDB-00002","wimal","7500"},{"SDB-00003","amal","80000"}};
+        String[][] customers = new String[0][3];
 
         main_loop:
         do{
